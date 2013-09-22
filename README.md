@@ -1,4 +1,4 @@
 Bash-Scripts
 ============
 
-Some useful scripts that I wrote
+Some useful shell scripts.
