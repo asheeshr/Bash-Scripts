@@ -2,6 +2,8 @@
 
 #Generates audio notification when CPU load average is above 90%
 
+sleep 30 #To allow boot process to complete. CPU load will be high initially.
+
 while true
 do
     list=`cat /proc/loadavg`
