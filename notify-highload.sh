@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Generates audio notification when CPU load average is above 90%
+#Generates notification when CPU load average is above specified limit
 
 sleep 30 #To allow boot process to complete. CPU load will be high initially.
 
@@ -18,10 +18,16 @@ do
     then
 	#Change to default player if pulse audio is not installed
 	paplay /usr/share/sounds/ubuntu/stereo/system-ready.ogg
+
+	#Generates visual notification
+	notify-send -i /usr/share/icons/default.kde4/128x128/devices/cpu.png -t 400 "High CPU Load"'!' \
+	"The CPU has been hard at work in the past minute"
 	
 	#PC Speaker is disabled on default configuration of Ubuntu
 	#printf "\a" 
 	
+	sleep 5 #High load averages are reflected for the next few seconds 
+
     fi
     
     sleep 5
