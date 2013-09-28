@@ -3,8 +3,8 @@
 #Generates notification when CPU load average is above specified limit
 
 #Default Settings
-AUDIO=YES #Sets audio notification
-GRAPHICAL=YES #Sets notify-send/desktop notification
+AUDIO=NO #Sets audio notification
+GRAPHICAL=NO #Sets notify-send/desktop notification
 VERBOSE=NO #Sets terminal output
 CPU_LOAD_TIME=1 #Set time duration for which to check load averages. Later set to argument number. Initial 1, 5 or 15
 CPU_LOAD_LMT=90 #Set limit for high load average. Any number >0
@@ -79,7 +79,7 @@ do
     
     if test $load -ge $highload
     then
-	#Change to default player if pulse audio is not installed
+	
 	if [ "YES" == $AUDIO ] 
 	then
 	    paplay /usr/share/sounds/ubuntu/stereo/system-ready.ogg &
