@@ -19,3 +19,13 @@ To use this script:
 - Create a file called `notify-highload.sh` and paste the code or simply git clone this repository.
 - Give the script execution priveleges using `chmod +x ./notify-highload.sh`
 - Run from terminal or add it to your startup applications. Use atleast one of `-a` or `-g` to enable notifications.
+
+
+<h3>Work in Progress</h3>
+
+- notify-hdspace.sh
+
+<h3>Planned Scripts</h3>
+- notify-hdusage.sh
+- notify-wifinew.sh
+- notify-bluenew.sh
