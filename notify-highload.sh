@@ -21,11 +21,12 @@ do
 	a) AUDIO=YES;;
 	g) GRAPHICAL=YES;;
 	v) VERBOSE=YES;;
-	t) case $OPTARG in
-	    #1) CPU_LOAD_TIME=1;; #Set by default
-	    5) CPU_LOAD_TIME=2;;
-	    15)CPU_LOAD_TIME=3;;
-	    esac;;
+	t) #case $OPTARG in
+	   # 1) CPU_LOAD_TIME=1;; #Set by default
+	   # 5) CPU_LOAD_TIME=2;;
+	   # 15)CPU_LOAD_TIME=3;;
+	   # esac;;
+	    CPU_LOAD_TIME=$OPTARG;;
 	    #shift ;;
         l) if [ $OPTARG -gt 0 ] 
 	   then
@@ -71,7 +72,13 @@ do
     list=`cat /proc/loadavg`
     set -- $list
     
-    load=$CPU_LOAD_TIME #Extract required cpu load
+    #load=$CPU_LOAD_TIME #Extract required cpu load
+    case $CPU_LOAD_TIME in
+	5) load=$2;;
+	15)load=$3;;
+	*) load=$1;;
+    esac
+    
     load=`echo "scale=2; $load * 100" | bc` #Convert to integer
     load=`printf "%.0f" $load` #Remove decimal digits
 
