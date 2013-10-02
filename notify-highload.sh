@@ -26,7 +26,7 @@ do
 	   # 5) CPU_LOAD_TIME=2;;
 	   # 15)CPU_LOAD_TIME=3;;
 	   # esac;;
-	    CPU_LOAD_TIME=$OPTARG;;
+	    CPU_LOAD_TIME=$OPTARG;; #Check performed later
 	    #shift ;;
         l) if [ $OPTARG -gt 0 ] 
 	   then
@@ -73,11 +73,11 @@ do
     set -- $list
     
     #load=$CPU_LOAD_TIME #Extract required cpu load
-    case $CPU_LOAD_TIME in
+    case $CPU_LOAD_TIME in #To access the arguments. Defaults to 1 minute load average
 	5) load=$2;;
 	15)load=$3;;
 	*) load=$1;;
-    esac
+    esac #http://unix.stackexchange.com/a/93242/29295
     
     load=`echo "scale=2; $load * 100" | bc` #Convert to integer
     load=`printf "%.0f" $load` #Remove decimal digits
@@ -105,7 +105,7 @@ do
 	
 	if [ "YES" == $VERBOSE ]
 	then
-	    echo "CPU Load High!"
+	    echo "CPU load high on `date "+%D at %T"`"!
 	fi
 
 	sleep $TIME_GAP_NOTIFICATIONS #High load averages are reflected for the next few seconds 
