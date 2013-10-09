@@ -20,6 +20,9 @@ To use this script:
 - Give the script execution priveleges using `chmod +x ./notify-highload.sh`
 - Run from terminal or add it to your startup applications. Use atleast one of `-a` or `-g` to enable notifications.
 
+<h5>Tested On</h5>
+
+- Ubuntu 12.04 LTS
 
 <h3>Work in Progress</h3>
 
