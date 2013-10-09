@@ -15,9 +15,12 @@ This script generates a notifcation whenever the CPU load increases beyond a spe
 - Set gap between notifications using `-n <seconds>`
 - Add initial delay to load checking using `-b <seconds>`
 
+These options will last only throughout that specific run of the script. You should use these options to test and figure out what settings work out for you. 
+once you know what changes you need to make, you can directly edit the configuration file `~/.highload.cfg` using any editor.
+
 To use this script:
 - Create a file called `notify-highload.sh` and paste the code or simply git clone this repository.
-- Give the script execution priveleges using `chmod +x ./notify-highload.sh`
+- Give the script execution privileges using `chmod +x ./notify-highload.sh`
 - Run from terminal or add it to your startup applications. Use atleast one of `-a` or `-g` to enable notifications.
 
 <h5>Tested On</h5>
