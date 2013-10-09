@@ -2,16 +2,43 @@
 
 #Generates notification when CPU load average is above specified limit
 
-#Default Settings
-AUDIO=NO #Sets audio notification
-GRAPHICAL=NO #Sets notify-send/desktop notification
-VERBOSE=NO #Sets terminal output
-CPU_LOAD_TIME=1 #Set time duration for which to check load averages. Later set to argument number. Initial 1, 5 or 15
-CPU_LOAD_LMT=90 #Set limit for high load average. Any number >0
-TIME_GAP_NOTIFICATIONS=5 #Set gap between successive notifications. Any number >=0
-TIME_GAP_BOOT=30 #Set initial delay in starting. Any number >=0
-TIME_PERIOD=5 #Sets timegap between successive runs
+if [ ! -f ~/.highload.cfg ] #If file doesnt exist, then create it
+then
+    
+    #Redirecting STDOUT to file
+    exec 4<&1
+    exec 1> ~/.highload.cfg
 
+    #Default Settings
+    echo "AUDIO=NO #Sets audio notification"
+    echo "GRAPHICAL=NO #Sets notify-send/desktop notification"
+    echo "VERBOSE=NO #Sets terminal output"
+    echo "CPU_LOAD_TIME=1 #Set time duration for which to check load averages. Later set to argument number. Initial 1, 5 or 15"
+    echo "CPU_LOAD_LMT=90 #Set limit for high load average. Any number >0"
+    echo "TIME_GAP_NOTIFICATIONS=5 #Set gap between successive notifications. Any number >=0"
+    echo "TIME_GAP_BOOT=30 #Set initial delay in starting. Any number >=0"
+    echo "TIME_PERIOD=5 #Sets timegap between successive runs"
+    
+    #Setting STDOUT back
+    exec 1<&4
+   
+    echo "Creating configuration file with defaults" 
+
+fi
+
+if [ ! -x ~/.highload.cfg ] #If file is not executable, then make it
+then 
+    chmod +x ~/.highload.cfg
+fi
+
+. ~/.highload.cfg #Load configuration file
+    
+if [ $VERBOSE == "YES" ]
+then 
+	echo "Loading configuration file"
+fi
+
+    
 #set -- `getopts agvc:l:t:i: "$@"` #Parse command line parameters and options
 #while [ -n "$1" ] #Set settings to passed parameters
 
@@ -51,6 +78,7 @@ do
 	esac
 done
 
+
 if [ "YES" == $VERBOSE ] #Displaying settings
 then 
     echo "Parameters set:"
@@ -64,6 +92,10 @@ then
     echo ""
 fi
 
+##Testing
+#echo "Done"
+#exit 0
+##
 
 sleep $TIME_GAP_BOOT #To allow boot process to complete. CPU load will be high initially.
 
