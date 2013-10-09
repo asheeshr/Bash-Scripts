@@ -18,7 +18,11 @@ then
     echo "TIME_GAP_NOTIFICATIONS=5 #Set gap between successive notifications. Any number >=0"
     echo "TIME_GAP_BOOT=30 #Set initial delay in starting. Any number >=0"
     echo "TIME_PERIOD=5 #Sets timegap between successive runs"
-    
+    echo "#The next few settings are distro dependent. Please edit depending on your configuration."
+    echo 'ICON="/usr/share/icons/default.kde4/128x128/devices/cpu.png" #Set the icon to be used for desktop notifications'
+    echo 'NOTIFICATION_SOUND="/usr/share/sounds/ubuntu/stereo/system-ready.ogg" #Set the audio file to be used for notifications'
+    echo 'PLAYER="paplay" #Set to default player. Usually, paplay'
+
     #Setting STDOUT back
     exec 1<&4
    
@@ -93,7 +97,7 @@ then
 fi
 
 ##Testing
-#echo "Done"
+echo "Done"
 #exit 0
 ##
 
@@ -121,14 +125,14 @@ do
 	
 	if [ "YES" == $AUDIO ] 
 	then
-	    paplay /usr/share/sounds/ubuntu/stereo/system-ready.ogg &
+	    $PLAYER $NOTIFICATION_SOUND &
 	fi
 
 	#Generates visual notification
 	if [ "YES" == $GRAPHICAL ]
 	then
-	    notify-send -i /usr/share/icons/default.kde4/128x128/devices/cpu.png "High CPU Load"'!' \
-		"The CPU has been hard at work in the past minute." #No support for timeouts. Default is 5 seconds.
+	    notify-send -i $ICON "High CPU Load"'!' "The CPU has been hard at work in the past minute." 
+	    #No support for timeouts. Default is 5 seconds.
 	    #notify-send bug report https://bugs.launchpad.net/ubuntu/+source/notify-osd/+bug/390508
 	fi		
 	
